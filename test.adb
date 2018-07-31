@@ -16,6 +16,10 @@ is
    function Some_Func(X : in Integer) return Boolean;
    function Func_Without_Args return Boolean;
 
+   type    TypeA is new Integer;
+   subtype TypeB is     Integer range 1 .. 15;
+   type    TypeC is     array (TypeB range <>) of aliased TypeA;
+
 begin
 
    null;

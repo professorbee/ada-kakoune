@@ -81,8 +81,8 @@ add-highlighter shared/ada/code regex \
 
 # Highlight types in type declarations
 add-highlighter shared/ada/code regex \
-    (sub)?type\s+([a-zA-Z_0-9]+)\s+is\s+(new\s+)?([a-zA-Z_0-9]+) \
-    2:type 4:type
+    (sub)?type\s+([a-zA-Z_0-9]+)\s+is\s+(new\s+|array\s*\(([a-zA-Z_0-9]+)[^\)]*\)\s+of(\s+aliased)\s+)?([a-zA-Z_0-9]+) \
+    2:type 4:type 6:type
 
 hook global WinSetOption filetype=ada %{
     set-option window aligntab false
