@@ -15,6 +15,10 @@ define-command -hidden Ada_Adjust_Indentation_On_New_Line %~
     !
 ~
 
+add-highlighter shared/ regions -default code -match-capture ada \
+    string  %{(?<!\\)(?:\\\\)*\K"} %{(?<!\\)(?:\\\\)*"} '' \
+    comment '(?<!\$)--' '$' ''
+
 %sh{
     # Reserved words, from Ada Reference Manual section 2.9.
     # Separated by pipes to make it valid regex.
@@ -41,7 +45,6 @@ define-command -hidden Ada_Adjust_Indentation_On_New_Line %~
 ###################################
 ## Highlight regular expressions ##
 ###################################
-#
 
 # Massive thanks to regex101.com for saving me from countless regex-induced
 # brain aneurysms.
@@ -51,17 +54,13 @@ add-highlighter shared/ada/code    regex (xor|mod|rem|abs|=|<|>|\+|–|&|\*|/|:)
 
 # Decimal Literals (Ada 2012 RM section 2.4.1)
 # Examples: 0.01, 000001, 1234_5678, 1_2_3.4_5_6e+12
-add-highlighter shared/ada/code    regex ([0-9][0-9_]*)(\.[0-9_]+)?(([Ee][+-]?)([0-9_]+))? \
-    1:value 2:value 4:default 5:value 
+add-highlighter shared/ada/code    regex ([^a-zA-Z_])([0-9][0-9_]*)(\.[0-9_]+)?(([Ee][+-]?)([0-9_]+))? \
+    2:value 3:value 5:default 6:value 
 # Based Literals (Ada 2012 RM section 2.4.2)
 # Examples: 16#e#E-1, 2#1.1111_1111_1110#e11, 16#CAFE_F00D 
 add-highlighter shared/ada/code    regex ([0-9]{1,2})(#)([0-9_.a-fA-F]+)((#)([Ee][+-]?)([0-9]+))? \
     1:value 2:operator 3:value 5:operator 6:default 7:value
 
-
-add-highlighter shared/ regions -default code -match-capture ada \
-    string  %{(?<!\\)(?:\\\\)*\K"} %{(?<!\\)(?:\\\\)*"} '' \
-    comment '(?<!\$)--' '$' ''
 
 add-highlighter shared/ada/string  fill string
 add-highlighter shared/ada/comment fill comment
