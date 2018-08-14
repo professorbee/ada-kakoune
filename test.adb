@@ -13,8 +13,9 @@ is
    F :          Matrix3 := 0;
    G :          Type_5  := Value_4_3_2_1(0);
 
-   function Some_Func(X : in Integer) return Boolean;
-   function Func_Without_Args return Boolean;
+   function  Some_Func(X : in Integer) return Boolean;
+   function  Func_Without_Args return Boolean;
+   procedure Proc_Without_Args;
 
    type    TypeA is new Integer;
    subtype TypeB is     Integer range 1 .. 15;
