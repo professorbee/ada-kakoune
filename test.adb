@@ -18,12 +18,12 @@ is
    I :          String  := Integer'Image(1_2_3_4);
    J :          String  := "Integer'Image(1_2_3_4);";
 
-   function  Some_Func(X : in Integer) return Boolean;
+   function  Func(X : in Integer) return Boolean;
    function  Func_Without_Args return Boolean;
    procedure Proc_Without_Args;
-   function  Func_With_Many_Args(X : in     Integer;
-                                 Y :    out Integer;
-                                 Z : in out Some_Module.Some_Type)
+   function  Func_With_Many_Args(X    : in     Integer;
+                                 Y    :    out Integer;
+                                 Z, W : in out Some_Module.Some_Type)
       return Some_Type;
 
    FuNcTiON Case_Insensitivity_Test ReTuRn BOOLEAN;

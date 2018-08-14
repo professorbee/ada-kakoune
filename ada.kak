@@ -55,7 +55,7 @@ add-highlighter shared/ada/code/ regex \
 
 # Function names and return types
 add-highlighter shared/ada/code/ regex \
-    '(?i)function\s+([\w.]+)\s*(\([\s\w_.:;]*\))?\s+return\s+([\w.]+)' \
+    '(?i)function\s+([\w.]+)\s*(\([\s\w_.:;,]*\))?\s+return\s+([\w.]+)' \
     1:function 3:type
 
 
