@@ -5,8 +5,10 @@ procedure Module.Submodule.Some_Proc
     Arg4 :        not null access all Positive)
 is
 
-   A : constant Integer := 2#0101_1001;
-   B : constant         := 16#CaFe_F00d#E+10;
+   -- A comment
+   -- Across multiple lines
+   A : constant Integer := 2#0101_1001; -- After a declaration
+   B : CONSTANT         := 16#CaFe_F00d#E+10;
    C :          Integer := Some_Function_Call(0);
    D :          Integer := 500;
    E :          Float   := 1_2_3_4.5_6_7_8e-1_2_3_4;
@@ -16,13 +18,20 @@ is
    function  Some_Func(X : in Integer) return Boolean;
    function  Func_Without_Args return Boolean;
    procedure Proc_Without_Args;
+	function  Func_With_Many_Args(X : in     Integer;
+										   Y :    out Integer;
+										   Z : in out Some_Module.Some_Type)
+		return Some_Type;
+
+   FuNcTiON Case_Insensitivity_Test ReTuRn BOOLEAN;
 
    type    TypeA is new Integer;
    subtype TypeB is     Integer range 1 .. 15;
    type    TypeC is     array (TypeB range <>) of aliased TypeA;
+   type    TypeD is tagged null record;
+   type    TypeE is new TypeD with null record;
+   type    物    is new 事;
 
 begin
-
    null;
-
-end Something;
+end Module.Submodule.Some_Proc;
