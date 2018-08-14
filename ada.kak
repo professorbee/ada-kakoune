@@ -43,15 +43,15 @@ add-highlighter shared/ada/code/ regex \
     2:value 3:value 5:operator 6:value
 
 # Based Literals (Ada 2012 RM section 2.4.2)
-# Examples: 16#e#E-1, 2#1.1111_1111_1110#e11, 16#CAFE_F00D 
+# Examples: 16#e#E-1, 2#1.1111_1111_1110#e11, 16#CAFE_F00D#
 add-highlighter shared/ada/code/ regex \
-    ([0-9]{1,2})(#)([0-9_.a-fA-F]+)((#)([Ee][+-]?)([0-9]+))? \
-    1:value 2:operator 3:value 5:operator 6:operator 7:value
+    ([0-9]{1,2})(#)([0-9_.a-fA-F]+)(#)(([Ee][+-]?)([0-9]+))? \
+    1:value 2:operator 3:value 4:operator 6:operator 7:value
 
 # Types in declarations and function arguments
 add-highlighter shared/ada/code/ regex \
-    (?i)(:\s+)(constant\s+)?(in\s+)?(out\s+)?(not\s+null\s+)?(access\s+(all\s+)?)?([\w.]+)? \
-    8:type
+    (?i)(:\s+)(constant\s+)?(in\s+)?(out\s+)?(not\s+null\s+)?(access\s+(all\s+)?)?(aliased\s+)?([\w.]+)? \
+    9:type
 
 # Function names and return types
 add-highlighter shared/ada/code/ regex \

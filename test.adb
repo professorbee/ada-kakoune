@@ -7,7 +7,7 @@ is
 
    -- A comment
    -- Across multiple lines
-   A : constant Integer := 2#0101_1001; -- After a declaration
+   A : constant Integer := 2#0101_1001#; -- After a declaration
    B : CONSTANT         := 16#CaFe_F00d#E+10;
    C :          Integer := Some_Function_Call(0);
    D :          Integer := 500;
@@ -17,6 +17,8 @@ is
    H :          Rec     := Rec'(Val => "Some string");
    I :          String  := Integer'Image(1_2_3_4);
    J :          String  := "Integer'Image(1_2_3_4);";
+
+   Var_With_Numbers_0000 : constant Integer := 0;
 
    function  Func(X : in Integer) return Boolean;
    function  Func_Without_Args return Boolean;
@@ -33,7 +35,7 @@ is
    type    TypeC is     array (TypeB range <>) of aliased TypeA;
    type    TypeD is tagged null record;
    type    TypeE is new TypeD with null record;
-   type    物    is new 事;
+   type    物    is new 事; -- Unicode test
 
 begin
    null;
