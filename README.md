@@ -5,8 +5,6 @@ small benefits like auto-indentation (which doesn't yet work perfectly).
 
 To install, chuck the file in your autoload folder.
 
-![](https://wtok.keybase.pub/ada-kakoune.png)
-
 There are some improvements I'd like to make before I call this complete.
 
 The main pain point is that `begin` and other such keywords aren't reduced in
@@ -21,4 +19,9 @@ though.
 
 Anyway, hopefully you find this useful. Feel free to open an issue if you
 encounter any problems.
+
+# Preview
+
+![](https://wtok.keybase.pub/ada-kakoune.png)
+
 
