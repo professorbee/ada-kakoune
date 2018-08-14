@@ -88,6 +88,10 @@ add-highlighter shared/ada/code/ regex \
     (?i)type\s+([\w]+)\s+is\s+(tagged\s+)?(null\s+)?record \
     1:type
 
+# Initialisers
+add-highlighter shared/ada/code/ regex \
+    (?i)([\w.]+)(?=') \
+    1:type
 
 #
 # Default settings

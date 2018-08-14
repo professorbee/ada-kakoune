@@ -14,6 +14,9 @@ is
    E :          Float   := 1_2_3_4.5_6_7_8e-1_2_3_4;
    F :          Matrix3 := 0;
    G :          Type_5  := Value_4_3_2_1(0);
+   H :          Rec     := Rec'(Val => "Some string");
+   I :          String  := Integer'Image(1_2_3_4);
+   J :          String  := "Integer'Image(1_2_3_4);";
 
    function  Some_Func(X : in Integer) return Boolean;
    function  Func_Without_Args return Boolean;
