@@ -5,6 +5,31 @@ procedure Module.Submodule.Some_Proc
     Arg4 :        not null access all Positive)
 is
 
+	-- Named block
+	Block_Name :
+	declare
+	begin
+	end Block_Name;
+
+	-- Named loop
+	Loop_Name :
+	loop
+	end loop Loop_Name;
+
+	-- Label
+	<<Goto_Target_Label>>
+	goto Goto_Target_Label;
+
+   type T is new Pack1.Pack2.T;
+
+   function Thing return X is
+      type Rec is record
+         Thing : T;
+      end record;
+   begin
+   end Thing;
+
+
    -- A comment
    -- Across multiple lines
    A : constant Integer := 2#0101_1001#; -- After a declaration

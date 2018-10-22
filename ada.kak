@@ -26,7 +26,6 @@ evaluate-commands %sh{
     printf '%s\n' "hook global WinSetOption filetype=ada %{
         set-option window static_words '${keywords}'
     }" | tr '|' ':'
-
     # Highlight keywords
     printf "%s\n" "add-highlighter shared/ada/code/ regex \b(?i)(${keywords})\b 0:keyword"
 }
@@ -50,19 +49,28 @@ add-highlighter shared/ada/code/ regex \
 
 # Types in declarations and function arguments
 add-highlighter shared/ada/code/ regex \
-    (?i)(:\s+)(constant\s+)?(in\s+)?(out\s+)?(not\s+null\s+)?(access\s+(all\s+)?)?(aliased\s+)?([\w.]+)? \
-    9:type
+    (?i)(?::\s+)(?!declare)(?!loop)(?:constant\s+)?(?:in\s+)?(?:out\s+)?(?:not\s+null\s+)?(?:access\s+(?:all\s+)?)?(?:aliased\s+)?([\w.]+)? \
+    1:type
 
 # Function names and return types
 add-highlighter shared/ada/code/ regex \
     '(?i)function\s+([\w.]+)\s*(\([\s\w_.:;,]*\))?\s+return\s+([\w.]+)' \
     1:function 3:type
 
-
 # Procedure names
 add-highlighter shared/ada/code/ regex \
     (?i)procedure\s+([\w.]+) \
-    1:function
+    1:function 2:function
+
+# Labels (for goto)
+add-highlighter shared/ada/code/ regex \
+    (?i)<<([\w]+)>> \
+    1:meta
+
+# Labels (for named blocks)
+add-highlighter shared/ada/code/ regex \
+    (?i)([\w]+)\s+:\s+(declare|loop) \
+    1:meta
 
 #
 # Highlight types in type declarations
@@ -80,20 +88,28 @@ add-highlighter shared/ada/code/ regex \
 
 # New type declarations
 add-highlighter shared/ada/code/ regex \
-    (?i)type\s+([\w]+)\s+is\s+new\s+([\w.]+) \
-    1:type 2:type
+    (?i)type\s+([\w]+)\s+is\s+new\s+(?:([\w.]+)\.)?([\w]+) \
+    1:type 2:module 3:type
 
 # Record declarations
 add-highlighter shared/ada/code/ regex \
     (?i)type\s+([\w]+)\s+is\s+(tagged\s+)?(null\s+)?record \
     1:type
 
-# Initialisers
+#
+# Highlight things with apostrophes
+#
+
+# '(...) Initialisers
 add-highlighter shared/ada/code/ regex \
-    (?i)([\w.]+)(?=') \
+    (?i)([\w.]+)(?='\() \
     1:type
 
-#
+# I considered using the attribute list from the RM to highlight
+# things based on attributes they've been given, but that turned out
+# to be pretty complicated. You'll just have to live without that.
+
+# 
 # Default settings
 #
 
@@ -102,13 +118,11 @@ define-command -hidden Ada_Adjust_Indentation_On_New_Line %~
         # Preserve previous line indent
         try %{ execute-keys -draft \;K<a-&> }
         # De-indent certain words
-        try %{ execute-keys -draft <a-x> <a-k> (is|then|exception|begin|end)\h*$ <a-lt> }
+        try %{ execute-keys -draft <a-x> <a-k> (is|then|exception|begin|end)\h*$<ret> <a-lt> }
         # Clean up trailing whitespace on the previous line
-        try %{ execute-keys -draft k<a-x> s \h+$ <ret>d }
-        # Align to opening paren of previous line
-        try %{ execute-keys -draft [( <a-k> \([^\n]*\n[^\n]*\n? <ret> s \( <ret> '<a-;>' & }
+        try %{ execute-keys -draft k<a-x> s \h+$<ret>d }
         # Copy comments prefix (--)
-        try %{ execute-keys -draft \;<c-s>k<a-x> s ^\h*\K-{2,} <ret> y<c-o><c-o>P<esc> }
+        try %{ execute-keys -draft \;<c-s>k<a-x> s ^\h*\K-{2,}<ret> y<c-o><c-o>P<esc> }
     !
 ~
 
@@ -116,7 +130,7 @@ hook global WinSetOption filetype=ada %{
     set-option window aligntab     false
     set-option window indentwidth  3
     set-option window tabstop      3
-    set-option window comment_line "-- "
+    set-option window comment_line "--  "
 
     # Clean up trailing whitespaces when exiting insert mode.
     hook window InsertEnd  .*  %{ try %{ exec -draft <a-x>s^\h+$<ret>d } }
@@ -125,5 +139,5 @@ hook global WinSetOption filetype=ada %{
 
 hook global WinSetOption filetype=ada       %{ add-highlighter window/ ref ada }
 hook global WinSetOption filetype=(?!ada).* %{ remove-highlighter window/ada }
-hook global WinSetOption filetype=(?!ada).* %{ remove-hooks window/ kak-indent }
+hook global WinSetOption filetype=(?!ada).* %{ remove-hooks window kak-indent }
 
