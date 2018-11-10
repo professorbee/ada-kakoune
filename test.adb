@@ -29,7 +29,6 @@ is
    begin
    end Thing;
 
-
    -- A comment
    -- Across multiple lines
    A : constant Integer := 2#0101_1001#; -- After a declaration

@@ -67,10 +67,20 @@ add-highlighter shared/ada/code/ regex \
     (?i)<<([\w]+)>> \
     1:meta
 
+# Labels (in goto targets)
+add-highlighter shared/ada/code/ regex \
+    (?i)(?<=goto)\s+([\w]+) \
+    1:meta
+
 # Labels (for named blocks)
 add-highlighter shared/ada/code/ regex \
-    (?i)([\w]+)\s+:\s+(declare|loop) \
+    (?i)([\w]+)\s+:\s+(declare|loop|for|while) \
     1:meta
+
+# Labels (in 'end loop LABEL')
+# add-highlighter shared/ada/code/ regex \
+#     (?i)end\s+loop\s+([\w]+) \
+#     1:meta
 
 #
 # Highlight types in type declarations
