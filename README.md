@@ -1,23 +1,20 @@
 # Ada mode for Kakoune
 
-This file provides syntax highlighting for Ada in Kakoune.
+This plugin provides syntax highlighting and some auto-indentation
+for Ada in Kakoune.
 
 To install, chuck the file in your autoload folder.
 
-## Status
+Hopefully you find this useful.  Feel free to open an issue if you
+encounter any problems.
 
-I don't consider this complete quite yet -- I'd like the auto-indentation to be
-consistent and predictable first.
+## Updates
 
-Other reasonable improvements I'd like to make:
- - Auto-fill `begin ... end Thing;` when you type `is`
- - Provide a convenient means to type those big box-comments
- - Correctly align long lists of aspects (`with Pre => ..., Post => ...`)
- - Maybe highlight `end Pack;` or `end Func;` correctly. Probably too hard,
-though.
+At the time of writing, I'm not using Kakoune anymore, so I probably
+won't update this unless an issue is opened. 
 
-Hopefully you find this useful. Feel free to open an issue if you encounter 
-any problems.
+That said, please do ping me if you rely on this and a Kakoune update
+broke it. Ada is all about reliability, after all. 🙃
 
 ## Preview
 
