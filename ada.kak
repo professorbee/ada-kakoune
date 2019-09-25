@@ -12,15 +12,15 @@ add-highlighter shared/ada/regions/comment region -match-capture '--' '$' fill c
 # Reserved words, from Ada Reference Manual section 2.9.
 # Separated by pipes to make it valid regex.
 evaluate-commands %sh{
-    keywords="abort|else|new|return|elsif|reverse|abstract|end|null"
-    keywords="${keywords}|accept|entry|select|access|exception|of|separate"
-    keywords="${keywords}|aliased|exit|or|some|all|others|subtype|and|for|out"
-    keywords="${keywords}|synchronized|array|function|overriding|at|tagged"
-    keywords="${keywords}|generic|package|task|begin|goto|pragma|terminate|body"
-    keywords="${keywords}|private|then|if|procedure|type|case|in|protected"
-    keywords="${keywords}|constant|interface|until|is|raise|use|declare|range"
-    keywords="${keywords}|delay|limited|record|when|delta|loop|while|digits"
-    keywords="${keywords}|renames|with|do|requeue|not|xor|mod|rem|abs"
+    keywords="abort else new return elsif reverse abstract end null 
+              accept entry select access exception of separate
+              aliased exit or some all others subtype and for out
+              synchronized array function overriding at tagged
+              generic package task begin goto pragma terminate body
+              private then if procedure type case in protected
+              constant interface until is raise use declare range
+              delay limited record when delta loop while digits
+              renames with do requeue not xor mod rem abs"
 
     # Add the language's grammar to the static completion list
     printf '%s\n' "hook global WinSetOption filetype=ada %{
